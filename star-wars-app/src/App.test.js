@@ -3,19 +3,33 @@ import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import StarWarsCharacters from "./components/StarWarsCharacters";
 import App from "./App";
-// import { getData as mockGetData } from "./api";
 
 test("App is rendering properly", () => {
   render(<App />);
 });
 
-test("character component and buttons working properly", async () => {
-  const { getByText } = render(<StarWarsCharacters />);
-  const previous = getByText(/previous/i);
-  const next = getByText(/next/i);
+test("StarWarsCharacters component is rendering properly", () => {
+  render(<StarWarsCharacters />);
+})
 
-  expect(previous).toBeDisabled();
+test("renders the Previous button", () => {
+  const {queryByText} = render(<StarWarsCharacters />);
+  const previous = queryByText(/previous/i);
+})
+
+test("renders the Next button", () => {
+  const {queryByText} = render(<StarWarsCharacters />);
+  const next = queryByText(/next/i);
+})
+
+test("Previous button can be clicked", () => {
+  const {queryByText} = render(<StarWarsCharacters />);
+  const previous = queryByText(/previous/i);
   fireEvent.click(previous);
+})
+
+test("Next button can be clicked", () => {
+  const {queryByText} = render(<StarWarsCharacters />);
+  const next = queryByText(/next/i);
   fireEvent.click(next);
-  fireEvent.click(previous);
-});
+})
